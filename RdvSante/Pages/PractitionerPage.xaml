@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="RdvSante.Pages.PractitionerPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:RdvSante.Controls"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid ColumnDefinitions="48,*" Padding="8,12,16,0">
+            <Button Style="{StaticResource GhostButton}" Text="←" Clicked="OnBack" />
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                <Label Text="Votre praticien" FontSize="20" Style="{StaticResource Title}" />
+            </VerticalStackLayout>
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout x:Name="Root" Padding="20,12,20,20" Spacing="16">
+                <Grid ColumnDefinitions="80,*" ColumnSpacing="14">
+                    <Border Style="{StaticResource Avatar}" WidthRequest="80" HeightRequest="80">
+                        <Image Source="{Binding Photo}" Aspect="AspectFill" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                        <Label Text="{Binding Name}" Style="{StaticResource Title}" FontSize="20" />
+                        <Label Text="{Binding Specialty}" Style="{StaticResource Muted}" FontSize="13" />
+                        <Border Style="{StaticResource Badge}" BackgroundColor="{AppThemeBinding Light={StaticResource MintLight}, Dark={StaticResource MintDark}}" HorizontalOptions="Start">
+                            <Label Text="Consultation vidéo" TextColor="{StaticResource Primary}" FontSize="11" FontAttributes="Bold" />
+                        </Border>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="14">
+                        <Grid ColumnDefinitions="30,*">
+                            <Label Text="🏥" FontSize="18" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="{Binding Cabinet}" Style="{StaticResource Bold}" />
+                                <Label Text="{Binding City}" Style="{StaticResource Muted}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Grid ColumnDefinitions="30,*">
+                            <Label Text="💳" FontSize="18" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="{Binding Price, StringFormat='{0} XAF la consultation'}" Style="{StaticResource Bold}" />
+                                <Label Text="Conventionné secteur 1 · Carte Vitale acceptée" Style="{StaticResource Muted}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Grid ColumnDefinitions="30,*">
+                            <Label Text="🎥" FontSize="18" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="20 minutes en vidéo" Style="{StaticResource Bold}" />
+                                <Label Text="Depuis votre téléphone ou votre ordinateur" Style="{StaticResource Muted}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="À votre écoute" Style="{StaticResource Bold}" FontSize="16" />
+                    <Label Text="{Binding Bio}" Style="{StaticResource Muted}" FontSize="13" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Button Grid.Row="2" Text="Voir les créneaux" Clicked="OnSlots" Margin="20,8,20,20" />
+    </Grid>
+</ContentPage>

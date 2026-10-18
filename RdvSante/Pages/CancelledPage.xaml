@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="RdvSante.Pages.CancelledPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:RdvSante.Controls"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Padding="20,48,20,12" Spacing="14">
+                <Label Text="Rendez-vous annulé" Style="{StaticResource Title}" />
+                <Border Style="{StaticResource MintCard}" WidthRequest="72" HeightRequest="72" Padding="0" HorizontalOptions="Center" Margin="0,16">
+                    <Label Text="✓" FontSize="34" TextColor="{StaticResource Primary}" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Label Text="Votre rendez-vous est annulé" Style="{StaticResource Bold}" FontSize="16" HorizontalOptions="Center" />
+                <Label x:Name="InfoLabel" Style="{StaticResource Muted}" FontSize="13" HorizontalTextAlignment="Center" />
+                <Border Style="{StaticResource Card}" Margin="0,8,0,0">
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="DateLabel" Style="{StaticResource Bold}" />
+                        <Label x:Name="DetailLabel" Style="{StaticResource Muted}" />
+                        <Label Text="Annulé · Aucun frais" TextColor="{StaticResource Danger}" FontSize="12" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Button Grid.Row="1" Text="Prendre un nouveau rendez-vous" Clicked="OnNew" Margin="20,8,20,20" />
+    </Grid>
+</ContentPage>

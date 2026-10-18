@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="RdvSante.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:pages="clr-namespace:RdvSante.Pages"
+       FlyoutBehavior="Disabled"
+       Shell.NavBarIsVisible="False"
+       Shell.TabBarBackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+       Shell.TabBarForegroundColor="{StaticResource Primary}"
+       Shell.TabBarTitleColor="{StaticResource Primary}"
+       Shell.TabBarUnselectedColor="{StaticResource MutedLight}">
+
+    <!-- Écran de connexion (sans barre d'onglets) -->
+    <ShellContent Route="login" ContentTemplate="{DataTemplate pages:LoginPage}" />
+
+    <!-- Navigation principale : Accueil / Rendez-vous / Historique / Profil -->
+    <TabBar Route="main">
+        <Tab Route="home" Title="Accueil" Icon="tab_search">
+            <ShellContent Route="search" ContentTemplate="{DataTemplate pages:SearchPage}" />
+        </Tab>
+        <Tab Route="appointments" Title="Rendez-vous" Icon="tab_calendar">
+            <ShellContent Route="myappointments" ContentTemplate="{DataTemplate pages:AppointmentsPage}" />
+        </Tab>
+        <Tab Route="history" Title="Historique" Icon="tab_history">
+            <ShellContent Route="past" ContentTemplate="{DataTemplate pages:HistoryPage}" />
+        </Tab>
+        <Tab Route="profile" Title="Profil" Icon="tab_profile">
+            <ShellContent Route="me" ContentTemplate="{DataTemplate pages:ProfilePage}" />
+        </Tab>
+    </TabBar>
+</Shell>

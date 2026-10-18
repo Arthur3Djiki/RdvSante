@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="RdvSante.Pages.SlotsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:RdvSante.Controls"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid ColumnDefinitions="48,*" Padding="8,12,16,0">
+            <Button Style="{StaticResource GhostButton}" Text="←" Clicked="OnBack" />
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                <Label Text="Choisir un créneau" FontSize="20" Style="{StaticResource Title}" />
+                <Label Text="Étape 1 sur 2 · Disponibilités" Style="{StaticResource Muted}" />
+            </VerticalStackLayout>
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,12,20,12" Spacing="12">
+                <Grid ColumnDefinitions="48,*" ColumnSpacing="10">
+                    <Border Style="{StaticResource Avatar}" WidthRequest="44" HeightRequest="44">
+                        <Image x:Name="HeaderPhoto" Aspect="AspectFill" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label x:Name="HeaderName" Style="{StaticResource Bold}" />
+                        <Label x:Name="HeaderSub" Style="{StaticResource Muted}" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,8,0,0">
+                    <Label Text="‹" FontSize="24" Style="{StaticResource Muted}" />
+                    <Label Grid.Column="1" Text="Octobre 2026" Style="{StaticResource Bold}" FontSize="16" HorizontalOptions="Center" />
+                    <Label Grid.Column="2" Text="›" FontSize="24" Style="{StaticResource Muted}" />
+                </Grid>
+
+                <Grid x:Name="DaysGrid" ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="6" />
+                <Label Text="Tous les horaires sont indiqués à l’heure du Cameroun." Style="{StaticResource Muted}" />
+
+                <Label x:Name="DayTitle" Style="{StaticResource Title}" FontSize="18" Margin="0,8,0,0" />
+                <Label x:Name="AvailLabel" Style="{StaticResource Muted}" />
+                <Grid x:Name="SlotsGrid" ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="8" RowSpacing="8" />
+                <Label Text="Les horaires barrés ne sont plus disponibles." Style="{StaticResource Muted}" />
+
+                <Border Style="{StaticResource MintCard}" Padding="12">
+                    <Label Text="🎥  Prévoyez un endroit calme et une connexion internet stable." TextColor="{StaticResource Primary}" FontSize="12" />
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+        <VerticalStackLayout Grid.Row="2" Padding="20,8,20,20" Spacing="8">
+            <Label x:Name="HintLabel" Style="{StaticResource Muted}" HorizontalOptions="Center" />
+            <Button x:Name="ContinueBtn" Text="Continuer" Clicked="OnContinue" IsEnabled="False" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="RdvSante.Pages.CancelPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:RdvSante.Controls"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*">
+        <Grid ColumnDefinitions="48,*" Padding="8,12,16,0">
+            <Button Style="{StaticResource GhostButton}" Text="←" Clicked="OnBack" />
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                <Label Text="Annuler le rendez-vous" FontSize="20" Style="{StaticResource Title}" />
+            </VerticalStackLayout>
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,16,20,20" Spacing="14">
+                <Label Text="Souhaitez-vous annuler ce rendez-vous ?" Style="{StaticResource Title}" FontSize="20" />
+                <Label Text="Le créneau sera libéré pour un autre patient. Cette action est définitive." Style="{StaticResource Muted}" FontSize="13" />
+                <controls:AppointmentCard x:Name="Card" Margin="0,4,0,0" />
+                <Label Text="Vous recevrez un email de confirmation de l’annulation." Style="{StaticResource Muted}" />
+                <Button Text="Garder mon rendez-vous" Clicked="OnKeep" Margin="0,12,0,0" />
+                <Button Text="Confirmer l’annulation" Style="{StaticResource DangerButton}" Clicked="OnConfirmCancel" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="RdvSante.Pages.SearchPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:RdvSante.Controls"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*">
+        <VerticalStackLayout Padding="20,20,20,8" Spacing="8">
+            <Label Text="Trouver un praticien" Style="{StaticResource Title}" />
+            <Label Text="Des consultations vidéo, où que vous soyez." Style="{StaticResource Muted}" />
+            <Label Text="Nom ou spécialité" Style="{StaticResource FieldLabel}" Margin="0,8,0,0" />
+            <Border Style="{StaticResource Field}">
+                <Entry x:Name="SearchEntry" Placeholder="Rechercher un praticien" TextChanged="OnSearchChanged" />
+            </Border>
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                <Button x:Name="ChipAll" Text="Tous" Clicked="OnChip" CommandParameter="Tous" />
+                <Button x:Name="ChipGen" Grid.Column="1" Text="Généraliste" Clicked="OnChip" CommandParameter="Généraliste" />
+                <Button x:Name="ChipDerm" Grid.Column="2" Text="Dermato" Clicked="OnChip" CommandParameter="Dermato" />
+            </Grid>
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,4,20,20" Spacing="12">
+                <!-- État : chargement -->
+                <VerticalStackLayout x:Name="LoadingView" Spacing="12" Padding="0,40" IsVisible="False">
+                    <ActivityIndicator IsRunning="True" Color="{StaticResource Primary}" />
+                    <Label Text="Recherche de praticiens…" Style="{StaticResource Muted}" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <!-- État : liste -->
+                <VerticalStackLayout x:Name="ResultsView" Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label x:Name="CountLabel" Style="{StaticResource Bold}" />
+                        <Label Grid.Column="1" Text="En vidéo" Style="{StaticResource Muted}" />
+                    </Grid>
+                    <VerticalStackLayout x:Name="ListLayout" Spacing="12">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource Card}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnCardTapped" />
+                                    </Border.GestureRecognizers>
+                                    <Grid ColumnDefinitions="64,*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="10">
+                                        <Border Style="{StaticResource Avatar}" WidthRequest="56" HeightRequest="56">
+                                            <Image Source="{Binding Photo}" Aspect="AspectFill" />
+                                        </Border>
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                            <Label Text="{Binding Name}" Style="{StaticResource Bold}" />
+                                            <Label Text="{Binding Specialty}" Style="{StaticResource Muted}" />
+                                            <Label Text="{Binding Subtitle}" Style="{StaticResource Muted}" />
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="2" Text="›" FontSize="26" Style="{StaticResource Muted}" VerticalOptions="Center" />
+                                        <Label Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding NextSlot, StringFormat='📅  {0}'}"
+                                               TextColor="{StaticResource Primary}" FontSize="12" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+                <!-- État : aucun résultat -->
+                <VerticalStackLayout x:Name="EmptyView" Spacing="10" Padding="0,40" IsVisible="False">
+                    <Label Text="🔍" FontSize="40" HorizontalOptions="Center" />
+                    <Label Text="Aucun praticien trouvé" Style="{StaticResource Title}" FontSize="18" HorizontalOptions="Center" />
+                    <Label Text="Essayez une autre spécialité ou retirez vos filtres pour élargir la recherche."
+                           Style="{StaticResource Muted}" HorizontalTextAlignment="Center" />
+                    <Button Text="Effacer les filtres" Style="{StaticResource OutlineButton}" Clicked="OnClearFilters" Margin="0,8,0,0" />
+                </VerticalStackLayout>
+
+                <!-- État : erreur réseau (taper « erreur » dans la recherche pour le voir) -->
+                <VerticalStackLayout x:Name="ErrorView" Spacing="10" Padding="0,40" IsVisible="False">
+                    <Label Text="📡" FontSize="40" HorizontalOptions="Center" />
+                    <Label Text="Connexion indisponible" Style="{StaticResource Title}" FontSize="18" HorizontalOptions="Center" />
+                    <Label Text="Impossible de charger les praticiens. Vérifiez votre connexion internet et réessayez."
+                           Style="{StaticResource Muted}" HorizontalTextAlignment="Center" />
+                    <Button Text="Réessayer" Clicked="OnRetry" Margin="0,8,0,0" />
+                    <Label Text="Vos informations sont conservées. Aucun rendez-vous n’a été modifié."
+                           Style="{StaticResource Muted}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

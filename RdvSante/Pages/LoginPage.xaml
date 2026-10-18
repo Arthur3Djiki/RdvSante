@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="RdvSante.Pages.LoginPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:RdvSante.Controls"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="24,36,24,24" Spacing="10">
+            <HorizontalStackLayout Spacing="0">
+                <Label Text="RDV" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource Primary}" />
+                <Label Text="Santé." FontSize="28" FontAttributes="Bold" />
+            </HorizontalStackLayout>
+            <Label Text="Votre santé, à portée de rendez-vous." Style="{StaticResource Muted}" />
+
+            <Label Text="Heureux de vous revoir" Style="{StaticResource Title}" Margin="0,36,0,0" />
+            <Label Text="Connectez-vous pour consulter un professionnel à distance." Style="{StaticResource Muted}" />
+
+            <Label Text="Identifiant" Style="{StaticResource FieldLabel}" Margin="0,16,0,0" />
+            <Border x:Name="EmailBox" Style="{StaticResource Field}">
+                <Entry x:Name="EmailEntry" Placeholder="Votre adresse email" Keyboard="Email" />
+            </Border>
+            <Label x:Name="EmailError" Style="{StaticResource ErrorText}" IsVisible="False" />
+
+            <Label Text="Mot de passe" Style="{StaticResource FieldLabel}" />
+            <Border x:Name="PwdBox" Style="{StaticResource Field}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Entry x:Name="PwdEntry" Placeholder="Votre mot de passe" IsPassword="True" />
+                    <Label x:Name="TogglePwd" Grid.Column="1" Text="Afficher" Style="{StaticResource PrimaryText}" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTogglePwd" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Border>
+            <Label x:Name="PwdError" Style="{StaticResource ErrorText}" IsVisible="False" />
+
+            <Label Text="Mot de passe oublié ?" Style="{StaticResource PrimaryText}" HorizontalOptions="End" />
+
+            <Button Text="Se connecter" Clicked="OnLogin" Margin="0,12,0,0" />
+            <Label Text="Vous n’avez pas encore de compte ?" Style="{StaticResource Muted}" HorizontalOptions="Center" Margin="0,8,0,0" />
+            <Button Text="Créer un compte" Style="{StaticResource OutlineButton}" Clicked="OnRegister" />
+
+            <Border Style="{StaticResource MintCard}" Margin="0,16,0,0" Padding="12">
+                <Label Text="🛡  Vos informations de santé restent confidentielles." TextColor="{StaticResource Primary}" FontSize="12" />
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

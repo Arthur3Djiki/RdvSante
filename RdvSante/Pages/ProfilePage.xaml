@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="RdvSante.Pages.ProfilePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:RdvSante.Controls"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,20,20,24" Spacing="10">
+            <Label Text="Mon profil" Style="{StaticResource Title}" />
+            <Label Text="Vos informations et préférences" Style="{StaticResource Muted}" />
+
+            <Grid ColumnDefinitions="64,*" ColumnSpacing="12" Margin="0,12,0,8">
+                <Border Style="{StaticResource Avatar}" WidthRequest="56" HeightRequest="56">
+                    <Image Source="user" Aspect="AspectFill" />
+                </Border>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                    <Label x:Name="FullName" Style="{StaticResource Bold}" FontSize="16" />
+                    <Label x:Name="EditLink" Text="Modifier mes informations" Style="{StaticResource PrimaryText}" FontSize="12">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnEdit" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" RowDefinitions="Auto,Auto">
+                <Label Text="Prénom" Style="{StaticResource FieldLabel}" />
+                <Label Grid.Column="1" Text="Nom" Style="{StaticResource FieldLabel}" />
+                <Border Grid.Row="1" Style="{StaticResource Field}"><Entry x:Name="PrenomEntry" IsReadOnly="True" /></Border>
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Field}"><Entry x:Name="NomEntry" IsReadOnly="True" /></Border>
+            </Grid>
+            <Label Text="Email" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource Field}"><Entry x:Name="EmailEntry" Keyboard="Email" IsReadOnly="True" /></Border>
+            <Label Text="Téléphone" Style="{StaticResource FieldLabel}" />
+            <Border Style="{StaticResource Field}"><Entry x:Name="PhoneEntry" Keyboard="Telephone" IsReadOnly="True" /></Border>
+
+            <Grid ColumnDefinitions="30,*,Auto" Margin="0,14,0,0">
+                <Label Text="🔔" FontSize="18" VerticalOptions="Center" />
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label Text="Rappels" Style="{StaticResource Bold}" />
+                    <Label Text="Par email · 24 h avant" Style="{StaticResource Muted}" />
+                </VerticalStackLayout>
+                <Switch Grid.Column="2" IsToggled="True" />
+            </Grid>
+            <Grid ColumnDefinitions="30,*,Auto" Margin="0,8,0,0">
+                <Label Text="🌙" FontSize="18" VerticalOptions="Center" />
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label Text="Mode sombre" Style="{StaticResource Bold}" />
+                    <Label x:Name="DarkLabel" Text="Désactivé" Style="{StaticResource Muted}" />
+                </VerticalStackLayout>
+                <Switch x:Name="DarkSwitch" Grid.Column="2" Toggled="OnDarkToggled" />
+            </Grid>
+
+            <Button Text="Se déconnecter" Style="{StaticResource OutlineButton}" Clicked="OnLogout" Margin="0,20,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="RdvSante.Pages.HistoryPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:RdvSante.Controls"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*">
+        <VerticalStackLayout Padding="20,20,20,8" Spacing="4">
+            <Label Text="Historique" Style="{StaticResource Title}" />
+            <Label x:Name="SubLabel" Style="{StaticResource Muted}" />
+        </VerticalStackLayout>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,8,20,20" Spacing="12">
+                <Label x:Name="YearLabel" Text="2026" Style="{StaticResource Bold}" FontSize="18" />
+                <VerticalStackLayout x:Name="ListLayout" Spacing="12">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource Card}">
+                                <VerticalStackLayout Spacing="10">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label Text="{Binding Header}" Style="{StaticResource Muted}" VerticalOptions="Center" />
+                                        <Border Grid.Column="1" Style="{StaticResource Badge}" BackgroundColor="{Binding BadgeBg}">
+                                            <Label Text="{Binding Status}" TextColor="{Binding BadgeFg}" FontSize="11" FontAttributes="Bold" />
+                                        </Border>
+                                    </Grid>
+                                    <Grid ColumnDefinitions="52,*" ColumnSpacing="10">
+                                        <Border Style="{StaticResource Avatar}" WidthRequest="48" HeightRequest="48">
+                                            <Image Source="{Binding Practitioner.Photo}" Aspect="AspectFill" />
+                                        </Border>
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                            <Label Text="{Binding Practitioner.Name}" Style="{StaticResource Bold}" />
+                                            <Label Text="{Binding Subtitle}" Style="{StaticResource Muted}" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                    <Label Text="{Binding Detail}" Style="{StaticResource Muted}" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout x:Name="EmptyView" Spacing="10" Padding="0,40" IsVisible="False">
+                    <Label Text="🕘" FontSize="40" HorizontalOptions="Center" />
+                    <Label Text="Pas encore de consultation" Style="{StaticResource Title}" FontSize="18" HorizontalOptions="Center" />
+                    <Label Text="Vos rendez-vous terminés ou annulés apparaîtront ici, au même endroit."
+                           Style="{StaticResource Muted}" HorizontalTextAlignment="Center" />
+                    <Button Text="Trouver un praticien" Clicked="OnFind" Margin="0,8,0,0" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

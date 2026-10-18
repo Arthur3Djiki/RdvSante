@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="RdvSante.Pages.ConfirmPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:RdvSante.Controls"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid ColumnDefinitions="48,*" Padding="8,12,16,0">
+            <Button Style="{StaticResource GhostButton}" Text="←" Clicked="OnBack" />
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                <Label Text="Vérifier et confirmer" FontSize="20" Style="{StaticResource Title}" />
+                <Label Text="Étape 2 sur 2 · Récapitulatif" Style="{StaticResource Muted}" />
+            </VerticalStackLayout>
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,12,20,12" Spacing="12">
+                <controls:AppointmentCard x:Name="Card" />
+
+                <Label Text="Motif de consultation" Style="{StaticResource FieldLabel}" Margin="0,8,0,0" />
+                <Border Style="{StaticResource Field}">
+                    <Editor x:Name="MotifEditor" HeightRequest="80" Text="Suivi médical et renouvellement de traitement." />
+                </Border>
+
+                <Label Text="Recevoir un rappel" Style="{StaticResource FieldLabel}" Margin="0,8,0,0" />
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                    <Button x:Name="Rem24" Text="24 h" Clicked="OnReminder" CommandParameter="24 h" />
+                    <Button x:Name="Rem1" Grid.Column="1" Text="1 h" Clicked="OnReminder" CommandParameter="1 h" />
+                    <Button x:Name="RemNone" Grid.Column="2" Text="Aucun" Clicked="OnReminder" CommandParameter="Aucun" />
+                </Grid>
+                <Label x:Name="ReminderHint" Style="{StaticResource Muted}" />
+                <Label Text="En confirmant, vous réservez cette consultation. Vous pourrez l’annuler depuis Mes rendez-vous."
+                       Style="{StaticResource Muted}" />
+            </VerticalStackLayout>
+        </ScrollView>
+        <Button Grid.Row="2" Text="Confirmer le rendez-vous" Clicked="OnConfirm" Margin="20,8,20,20" />
+    </Grid>
+</ContentPage>

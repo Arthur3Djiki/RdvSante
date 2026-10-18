@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="RdvSante.Pages.AppointmentsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:RdvSante.Controls"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*">
+        <VerticalStackLayout Padding="20,20,20,8" Spacing="4">
+            <Label Text="Mes rendez-vous" Style="{StaticResource Title}" />
+            <Label x:Name="SubLabel" Style="{StaticResource Muted}" />
+        </VerticalStackLayout>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,8,20,20" Spacing="20">
+                <VerticalStackLayout x:Name="ListLayout" Spacing="24">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout Spacing="10">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Text="Cette semaine" Style="{StaticResource Bold}" FontSize="16" VerticalOptions="Center" />
+                                    <Border Grid.Column="1" Style="{StaticResource Badge}" BackgroundColor="#E1F3EE">
+                                        <Label Text="Confirmé" TextColor="#0F766E" FontSize="11" FontAttributes="Bold" />
+                                    </Border>
+                                </Grid>
+                                <controls:AppointmentCard />
+                                <Button Text="Rejoindre la consultation" IsEnabled="False" />
+                                <Label Text="Le lien vidéo sera actif 10 minutes avant le rendez-vous."
+                                       Style="{StaticResource Muted}" HorizontalOptions="Center" />
+                                <Button Text="Annuler le rendez-vous" Style="{StaticResource OutlineButton}" Clicked="OnCancel" />
+                                <Border Style="{StaticResource Card}">
+                                    <Grid ColumnDefinitions="30,*">
+                                        <Label Text="🔔" FontSize="18" VerticalOptions="Center" />
+                                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                            <Label Text="{Binding ReminderText}" Style="{StaticResource Bold}" />
+                                            <Label Text="{Binding ReminderSub}" Style="{StaticResource Muted}" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout x:Name="EmptyView" Spacing="10" Padding="0,40" IsVisible="False">
+                    <Label Text="📅" FontSize="40" HorizontalOptions="Center" />
+                    <Label Text="Aucun rendez-vous prévu" Style="{StaticResource Title}" FontSize="18" HorizontalOptions="Center" />
+                    <Label Text="Trouvez un professionnel et choisissez le créneau qui vous convient."
+                           Style="{StaticResource Muted}" HorizontalTextAlignment="Center" />
+                    <Button Text="Trouver un praticien" Clicked="OnFind" Margin="0,8,0,0" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
